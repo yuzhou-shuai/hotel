@@ -1,0 +1,9 @@
+{
+    "db": {
+        "user": "itcst",
+
+        "hos": "localhost",
+        "port": "27017",
+        "name": "blog"
+    }
+}

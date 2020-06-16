@@ -1,0 +1,32 @@
+@charset 'utf-8';
+
+/* 控件容器样式 (必须添加 position) */
+.word-count {
+    position: relative;
+}
+
+/* 文本域样式 */
+.word-count textarea {
+    resize: none;
+    height: 100px;
+    overflow-y: hidden;
+    padding: 0.75em 1em;
+}
+
+/* 字数统计容器样式 */
+.word-count-view-box {
+    font-size: 14px;
+    position: absolute;
+    white-space: nowrap;
+}
+
+/* 当前字数样式 */
+.word-count-view-now {}
+
+/* 最大字数样式 */
+.word-count-view-max {}
+
+/* 接近最大字数样式 */
+.count-will-full {
+    color: #d1191a;
+}

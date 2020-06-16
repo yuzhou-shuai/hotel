@@ -1,0 +1,224 @@
+{{extend './common/layout.html'}} {{block 'link'}}
+<link rel="stylesheet" href="/home/css/index.css">
+<link rel="stylesheet" href="/home/css/article.css">
+<link rel="stylesheet" href="/home/css/pinglun.css"> {{/block}} {{block 'main'}} {{include './common/shortcart.html'}}
+<!-- 文章列表开始 -->
+
+<div class="g">
+
+
+    <div>
+        <div class="box_md">
+            <h3>酒店预定</h3>
+        </div>
+        <div class="main">
+            <div class="zuo">
+                <div>
+                    <img style="height: 240px;width: 498px;" src="{{result.cover}}" id="preview">
+                </div>
+                <div class="xiao" style="float: left;">
+                    <div>
+                        <h4 style="font-weight: 750;margin-top: -10px;">{{result.content}}</h4>
+                    </div>
+                    <div><span style="margin-left:0px;">预定数:</span><span>{{previews.total}}</span><span></div> 
+                   <div style="margin-top: 10px;"><span style="margin-left:0px;">房价/晚:￥</span><span style="color: red;">{{result.price}}</span></div>
+                    <div style="margin-top: 10px;"><span style="margin-left:0px;">可住人数:<span >{{result.people}}</span>
+                        <div> </div>
+                        <div style="margin-top: 10px;"> <span style="margin-left:0px;">床位数:</span><span>{{result.bed}}</span><span></span></div>
+                        <div style="margin-top: 10px;"><span style="margin-left:0px;">房间设施:</span><span>{{@result.jianjie}}</span></div>
+                        <div style="margin-top: 25px;">
+                            <a href=" /home " style="color: #dd4c40; ">
+                                <<更多房型</a>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="you ">
+                    <form method="post" action="/home/preview" id="loginForm">
+
+                        <div style="margin-top: 20px;">
+                            <h4 style="margin-left: 20px;">预订信息</h4>
+                        </div>
+                        <div style="margin-left: 30px;display: inline-block;margin-top: 10px;">
+                            <label style="color: #666666;">入住时间:</label>
+                            <input class="intime form-control" name="intime" type="date" style="width:150px;height: 25px;margin-top: -25px;margin-left: 62px;" value="">
+                        </div>
+
+                        <div style="display: inline-block;">
+                            <label style="color: #666666;">离店时间:</label>
+                            <input class="outtime form-control" name="outtime" type="date" style="width:150px;height: 25px;margin-top: -25px;margin-left: 62px;">
+                        </div>
+                        <div style="margin-left: 30px;margin-top: 10px;">
+                            <label style="color: #666666;">房费总计:</label>
+                            <span>￥<span   style="color: red;font-size: 20px;" id="final" >{{result.price}}</span></span>
+                            <input type="hidden" id="price" value="{{result.price}}">
+                            <input type="hidden" name="price" id="finally">
+                        </div>
+
+
+                        <div style="margin-top: 20px;">
+                            <h4 style="margin-left: 20px;">入住信息</h4>
+                        </div>
+                        <div class="form-group">
+                            <label style="margin-left: 30px;">真实姓名:</label>
+                            <input name="name" type="text" style="width: 195px;height: 25px;display: inline-block !important;margin-left: 10px;" class="form-control" placeholder="请输入真实姓名">
+                        </div>
+                        <div class="form-group">
+                            <label style="margin-left: 30px;">身份证号:</label>
+                            <input name="idcard" type="number" style="width: 195px;height: 25px;display: inline-block !important;margin-left: 10px;" class="form-control" placeholder="请输入身份证号">
+                        </div>
+                        <div class="form-group" style="margin-left: 54px;margin-top: 20px;">
+                            <label>电话:</label>
+                            <input name="tel" type="number" style="width: 195px;height: 25px;display: inline-block !important;margin-left: 10px;" class="form-control" placeholder="请输入电话号码">
+                        </div>
+
+                        {{if user}}
+                        <input type="hidden" name="aid" value="{{@user._id}}"> {{else}} {{/if}}
+                        <input type="hidden" name="uid" value="{{@result._id}}">
+                        <div style="margin-left: 30px;margin-top: 20px;" class="form-group">
+                            <label style="color: #666666;">备注留言:</label>
+                            <textarea name="remark" class="form-control" style="width: 240px;margin-left: 65px;margin-top: -20px;height: 70px;resize: none;"></textarea>
+                        </div>
+                        <div style="color: #dd4c40;margin-left: 30px;margin-top: 30px;font-weight: 800;font-size: 14px;">
+                            <p>预定须知：请携带好本人的身份证，办理入住手续，本店办理入住手续需在前台缴纳押金<span>￥500</span></p>
+                        </div>
+                        {{if user}}
+                        <div style="margin-left: 30px;margin-top:20px;" class="queren">
+                            <button class="dianji" style=" border-radius: 5px;" type="submit" id="button">确认预定</button>
+                        </div>
+                        {{else}}
+                        <div style="margin-left: 30px;margin-top:20px !important;">
+                            <button id="tip" type="submit" style="width:79px;height: 32px;background-color: #df574b;color: azure;cursor: not-allowed;pointer-events: none;border-radius: 5px;">确认预定</button>
+                        </div>
+                        {{/if}}
+
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    {{block 'script'}}
+
+
+    <!--此段代码不可移动位置-->
+    <script src="/home/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript ">
+        loads();
+
+
+
+
+
+
+
+
+
+
+
+        var price = document.getElementById("price").value;
+        $(document).ready(function() {
+
+            var ddd = new Date();
+            var day = ddd.getDate();
+
+            if (ddd.getMonth() < 10) {
+                var month = "0" + (ddd.getMonth() + 1);
+            }
+
+            if (ddd.getDate() < 10) {
+                day = "0" + ddd.getDate();
+            }
+
+            var datew = ddd.getFullYear() + "-" + month + "-" + day;
+            var datew = datew.toString();
+
+            $(".intime").val(datew);
+            $(".intime").attr("min", datew);
+            $(".outtime").attr("min", datew);
+
+
+            $(".outtime").blur(function() {
+                var start = $(".intime").val();
+                var end = $(".outtime").val();
+
+
+                var startdate = new Date(start);
+                var enddate = new Date(end);
+
+
+                var time = enddate.getTime() - startdate.getTime();
+                var days = parseInt(time / (1000 * 60 * 60 * 24));
+
+                var abc = parseInt(price * days);
+                if (abc < 0 || abc == 0) {
+                    alert("请保证离店日期在入店日期之后！")
+                    $("#button").css('pointer-events', 'none')
+
+                } else {
+                    $("#button").css('pointer-events', 'auto')
+                }
+                $("#final").text(abc);
+                $("#finally").val(abc);
+            });
+
+
+        });
+
+        $('#loginForm').on('submit', function() {
+            //获取表单中用户输入的数据
+            var result = serializeToJson($(this))
+
+            if (result.intime.trim().length == 0) {
+                alert('请输入入住日期!')
+                    //阻止程序向下执行
+                return false;
+            }
+
+
+            if (result.outtime.trim().length == 0) {
+                alert('请输入离店日期!')
+                    //阻止程序向下执行
+                return false;
+            }
+
+            if (result.name.trim().length == 0) {
+                alert('请输入真实姓名!')
+                    //阻止程序向下执行
+                return false;
+            }
+
+
+            if (result.idcard.trim().length == 0) {
+                alert('请输入身份证号码!')
+                    //阻止程序向下执行
+                return false;
+            }
+
+            if (result.tel.trim().length == 0) {
+                alert('请输入手机号码!')
+                    //阻止程序向下执行
+                return false;
+            }
+            if (result.remark.trim().length == 0) {
+                alert('请输入备注信息!')
+                    //阻止程序向下执行
+                return false;
+            }
+
+
+
+            alert('恭喜您！预定成功')
+
+        });
+    </script>
+    {{/block}} {{include './common/foot.html'}} {{/block}}

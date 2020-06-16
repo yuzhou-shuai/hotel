@@ -1,0 +1,10 @@
+{{extend './common/layout.html'}} {{block 'main'}}
+<h3 class="  err" style="text-align: center;color:red;">{{msg}}</h3>
+{{/block}} {{block 'script'}}
+<script>
+    setTimeout(function() {
+
+        location.href = '/admin/login';
+    }, 1500)
+</script>
+{{/block}}

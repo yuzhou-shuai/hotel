@@ -1,0 +1,66 @@
+<!--顶部快捷导航栏-->
+<div class="shortcut">
+    <div class="w">
+        <div class="fl">
+            <ul>
+                <li>让旅行更幸福！</li>
+                {{if user}}
+                <li style="margin-left: 10px;">{{ user.username}} <span style="color:#0080ff">欢迎您</span></li> {{else}}
+                <li style="margin-left: 10px;">请<a href="/admin/login" style="color: #0066cc;">登录</a> 免费
+                    <a href="/admin/register" class="style-red">注册</a>
+                </li>
+                {{/if}}
+            </ul>
+        </div>
+        <div class="fr">
+            <ul>
+
+                {{if user}}
+                <li><a href="/home/order?id={{@user._id}}">我的订单</a></li>
+                <li class="spacer"></li>
+                {{else}} {{/if}}
+                <li><a href="/home/password">修改密码</a></li>
+                <li class="spacer"></li>
+                <li><a href="#">我的账号</a><i class="icomoon"></i></li>
+                <li class="spacer"></li>
+                <li><a href="#">企业采购</a></li>
+                <li class="spacer"></li>
+
+                <li><a href="#">客户服务</a><i class="icomoon"></i></li>
+                <li class="spacer"></li>
+                <li><a href="/home/logout">退出账号</a><i class="icomoon"></i></li>
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="w">
+
+    <div class="banners">
+
+        <!--受保护块，不建议修改》》》-->
+        <div class="click_left"><img class="get_height" onclick="banner_left_right('left')" src="images/banner_left.png"></div>
+        <div class="click_right"><img onclick="banner_left_right('right')" src="images/banner_right.png"></div>
+        <div class="number">
+            <div class="numbers"></div>
+            <div style="clear: both;"></div>
+        </div>
+        <!--《《《受保护块，不建议修改-->
+
+        <!--onlick事件调用函数link(参数1，参数2)>>>参数1:跳转链接; 参数2:跳转方式（true:在新的窗口打开链接,false:在当前窗口打开链接）-->
+        <div class="banner_img">
+
+            <!--在此位置内添加img标签即可>>>-->
+            <img class="banner_img1" src="images/Texture-1.png">
+            <img class="banner_img2" src="images/123.jpg">
+            <img class="banner_img3" src="images/Texture-3.png">
+            <!--<<<在此位置内添加img标签即可-->
+
+        </div>
+
+
+    </div>
+</div>
+
+<!--顶部快捷导航栏结束-->

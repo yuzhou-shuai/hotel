@@ -1,0 +1,26 @@
+<!-- 头部 -->
+<div class="header">
+    <!-- 网站标志 -->
+    <div class="logo fl">
+        酒店后台管理 <i>HOTEL</i>
+    </div>
+    <!-- /网站标志 -->
+    <!-- 用户信息 -->
+    <div class="info">
+        <div class="profile dropdown fr" style="width: auto;">
+            <span class="btn dropdown-toggle" data-toggle="dropdown">
+               {{ user.username}}  <span style="color:#0080ff">欢迎您</span>
+            <span class="caret"></span>
+            </span>
+            <ul class="dropdown-menu">
+                <li><a href="/home">前往首页</a></li>
+                <li><a href="/admin/pic ">上传头像</a></li>
+                <li><a href="/admin/password ">修改密码</a></li>
+                <li><a href="/admin/logout ">退出登录</a></li>
+
+            </ul>
+        </div>
+    </div>
+    <!-- /用户信息 -->
+</div>
+<!-- /头部 -->

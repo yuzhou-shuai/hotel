@@ -1,0 +1,214 @@
+{{extend './common/layout.html'}} {{block 'link'}}
+<link rel="stylesheet" href="/home/css/index.css">
+<link rel="stylesheet" href="/home/css/article.css">
+<link rel="stylesheet" href="/home/css/pinglun.css"> {{/block}} {{block 'main'}} {{include './common/shortcart.html'}}
+<!-- 文章列表开始 -->
+
+
+
+
+<div style="margin-top: 50px;">
+    <div class="box_hd">
+        <h3>酒店介绍</h3>
+    </div>
+    <div class="h" style="border-top:1px dashed rgb(189, 181, 181) ;font-size: 13px;">
+        <p>2008年开业 2014年装修 193间房 </p><br>
+        <p>上海南泉大酒店地处繁华的浦东陆家嘴金融贸易中心区域内，上海新国际博览中心、上海浦东科技馆等都环绕周围。</p><br>
+        <p>300平方米的多功能宴会厅，可同时容纳200人左右中小型会议或展览；小会议室可容纳10-20人的会议。多功能宴会厅也可承办各类大型宴会、自助餐、酒会等；五个餐厅包房也各具特色。</p><br>
+        <p>此外，这里还有草坪花园，你可以一边享用精美的早餐，一边在草坪边上呼吸新鲜的空气。</p><br>
+
+    </div>
+</div>
+
+
+<div class="zhengce">
+    <div class="box_hd">
+        <h3>酒店政策</h3>
+    </div>
+    <div class="x" style="font-size: 13px;">
+        <div style="border-bottom:1px dashed rgb(189, 181, 181) ;margin-top: 20px;">
+            <span style="color: #999999;">入住和离店</span>
+            <span style="margin-left: 40px;">入住时间：14:00以后  </span><span style="margin-left: 40px;">   离店时间：12:00以前</span>
+            <ul>
+                <li></li>
+            </ul>
+        </div>
+        <div class="m" style="border-bottom:1px dashed rgb(189, 181, 181) ;margin-top: 20px;"><span style="color: #999999;">儿童政策</span>
+            <ul style="display: inline-block;margin-left: 66px;">
+                <li>酒店允许携带儿童入住</li>
+                <li>不接受18岁以下客人在无监护人陪同的情况下入住</li>
+                <li>加床及儿童政策取决于您所选的房型，若超过房型限定人数，或携带儿童年龄不在政策描述范围内，可能需收取额外费用，提出的任何要求均需获得酒店的确认。</li>
+            </ul>
+        </div>
+        <div style="border-bottom:1px dashed rgb(189, 181, 181) ;margin-top: 20px;"><span style="color: #999999; ">早餐信息</span>
+            <ul style="display: inline-block;margin-left: 50px; ">
+                <li>形式：自助餐</li>
+                <li>价格：RMB 28/人</li>
+            </ul>
+        </div>
+        <div style="border-bottom:1px dashed rgb(189, 181, 181) ; margin-top: 20px;">
+            <span style="color: #999999; ">宠物</span><span style="margin-left: 79px; ">不可携带宠物。</span>
+            <ul>
+                <li></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="box_hd" style="margin-top: 150px;">
+        <h3>客房列表</h3>
+    </div>
+</div>
+
+<div class="w">
+    <table class="table table-striped table-bordered table-hover custom-table">
+        <thead style="background-color: azure;">
+            <tr>
+                <th style="width: 230px;text-align: center;">客房图片</th>
+                <th style="text-align: center;">房型</th>
+                <th style="text-align: center;">可住人数</th>
+                <th style="text-align: center;">床位数</th>
+                <th style="text-align: center;">房价(标准价)</th>
+                <th style="text-align: center;">房间状态</th>
+                <th style="text-align: center;">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{each result.records}}
+            <tr>
+
+                <td><img style="height: 130px;width: 230px;" src="{{$value.cover}}" id="preview"></td>
+                <td>
+                    <div style="margin-top: 65px;text-align: center;line-height: 8px;font-size: 14px;">{{@$value.content}}</div>
+                </td>
+
+                <td>
+                    <div style="margin-top: 60px;text-align: center;">{{$value.people}}</div>
+                </td>
+                <td>
+                    <div style="margin-top: 60px;text-align: center;">{{$value.bed}}</div>
+                </td>
+                <td>
+
+                    <div style="color: #ff6600;margin-top: 57px;text-align: center;font-size: 16px;"><span style="color:black !important;font-size: 14px !important;">￥</span>{{$value.price}}</div>
+
+                </td>
+                <td>
+                    <div style="margin-top: 58px;text-align: center;font-size: 14px; " class="{{$value.state=='yu'? '' : 'red'}}">{{$value.state=='yu'?'可预订':'已满房'}}</div>
+
+                </td>
+                <td>
+                    <div style=" margin-top: 53px;text-align: center;" class="anniu">
+                        <span><a class="{{$value.state=='yu'? 'yuding' : 'manfang'}}" href="/home/article?id={{@$value._id}} " >{{$value.state=='yu'? '可预订' : '已满房'}}</a></span>
+
+                    </div>
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    <div class="page w1100">
+        {{if result.page > 1}}
+        <a href="/home/?page={{result.page-1}}">上一页</a> {{/if}} {{each result.display}}
+        <a href="/home/?page={{$value}}" class="{{$value == result.page ? 'active' : ''}}">{{$value}}</a> {{/each}} {{if result.page
+        < result.pages}} <a href="/home/?page={{result.page - 0 + 1}}">下一页</a>
+            {{/if}}
+    </div>
+
+    <!-- 分页开始 -->
+
+</div>
+
+
+<div>
+    <div class="box_hd">
+        <h3>住客点评</h3>
+        <div style="float: right;margin-right: 166px;" class="bshare-custom icon-medium-plus"><a title="分享到" href="http://www.bShare.cn/" id="bshare-shareto" class="bshare-more">分享到</a>
+            <a title="分享到QQ空间" class="bshare-qzone"></a>
+            <a title="分享到新浪微博" class="bshare-sinaminiblog"></a>
+            <a title="分享到人人网" class="bshare-renren"></a>
+            <a title="分享到腾讯微博" class="bshare-qqmb"></a>
+            <a title="分享到网易微博" class="bshare-neteasemb"></a>
+            <a title="更多平台" class="bshare-more bshare-more-icon more-style-addthis"></a><span class="BSHARE_COUNT bshare-share-count">0</span></div>
+        <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/buttonLite.js#style=-1&amp;uuid=&amp;pophcol=2&amp;lang=zh"></script>
+        <script type="text/javascript" charset="utf-8" src="http://static.bshare.cn/b/bshareC0.js"></script>
+    </div>
+    <div class="m" style="border-top:1px dashed rgb(189, 181, 181) ;"></div>
+    <div class="article">
+        <div class="w1100">
+            <div class="container">
+
+
+                <div class="article-comment">
+                    {{if user}}
+                    <h4>评论</h4>
+
+                    <form class="comment-form" action="/home/comment" method="post">
+                        <div id="star" style="margin-left: 0px;">
+
+                            <span>酒店星级评论打分</span>
+                            <ul>
+                                <li><a href="javascript:;">1</a></li>
+                                <li><a href="javascript:;">2</a></li>
+                                <li><a href="javascript:;">3</a></li>
+                                <li><a href="javascript:;">4</a></li>
+                                <li><a href="javascript:;">5</a></li>
+                            </ul>
+                            <span></span>
+                            <p></p>
+
+                        </div>
+                        <!--star end-->
+                        <div id="demo" style="margin-top: 60px;" class="word-count" data-max-length="100">
+                            <textarea id="htmer" class="comment" name="content" style="resize: none;height: 100px;"></textarea>
+
+                        </div>
+                        <input type="hidden" name="uid" value="{{@user._id}}">
+
+                        <div class="items">
+                            <input type="submit" value="提交">
+                        </div>
+                    </form>
+                    {{else}}
+                    <div>
+                        <p style="color: red;font-size: 14px;">请先进行登录操作!!!</p>
+                    </div>
+                    {{/if}} {{each comment}}
+                    <div class="comment-list" style="border-bottom:1px dashed rgb(189, 181, 181) ;background-color: rgba(226, 219, 114, 0.1);height: 60px;">
+                        {{if $value.uid.avatar==null}}
+                        <div style="display: inline-block;"><img style="width: 60px;height: 60px;margin-top: -37px;" src="./images/default.png"></div>
+                        {{else}}
+                        <div style="display: inline-block;"><img style="width: 60px;height: 60px;margin-top: -37px;" src="{{$value.uid.avatar}}"></div>
+
+                        {{/if}}
+                        <div class="mb10" style="display: inline-block;margin-left: 15px;">
+                            <div class="article-info">
+                                <span class="author">{{$value.uid.username}}</span>
+                                <span>{{dataFormat($value.time,'yyyy-mm-dd HH:MM:ss')}}</span>
+                                <span>{{$value.uid.email}}</span>
+                            </div>
+                            <div class="comment-content" style="margin-top: 10px;">
+                                {{@$value.content}}
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{{block 'script'}}
+
+
+<!--此段代码不可移动位置-->
+
+<script type="text/javascript">
+    loads();
+</script>
+<!--此段代码不可移动位置-->{{/block}} {{include './common/foot.html'}}
+<!-- 分页结束 -->
+{{/block}}

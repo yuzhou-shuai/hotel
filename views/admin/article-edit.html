@@ -1,0 +1,108 @@
+{{extend './common/layout.html'}} {{block 'main'}}
+<!-- 头部 -->
+{{include './common/head.html'}}
+<!-- /头部 -->
+<!-- 主体内容 -->
+<div class="content">
+    <!-- 侧边栏 -->
+    {{include './common/aside.html'}}
+    <!-- 侧边栏 -->
+    <div class="main">
+        <!-- 分类标题 -->
+        <div class="title">
+            <h4></h4>
+        </div>
+
+        <!-- enctype 指定表单的编码类型
+表单中设计文件上传功能必须有enctype属性
+
+-->
+
+
+        <!-- /分类标题 -->
+        <form class="form-container" action="{{link}}" method="post" enctype="multipart/form-data">
+
+
+            <div class="form-group">
+                <label for="exampleInputFile">客房图片</label>
+                <input type="file" name="cover" id="file">
+                <div class="thumbnail-waper">
+                    <img class="img-thumbnail" src="{{list && list.cover}}" id="preview">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>房型</label>
+
+                <input value="{{list && list.content}}" name="content" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>可住人数</label>
+                <input value="{{list && list.people}}" name="people" type="number" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>床位数</label>
+                <input name="bed" value="{{list && list.bed}}" type="number" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>房价</label>
+                <input value="{{list && list.price }}" name="price" type="number" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>房间状态</label>
+                <select name="state" class="form-control">
+                        <option value="yu" {{list && list.state =='yu' ? 'selected' :''}}>可预订</option>
+                        <option value="man" {{list &&list.state =='man'? 'selected' :''}}>已满房</option>
+                    </select>
+            </div>
+            <div class="form-group">
+                <label>简介</label>
+                <textarea style="resize: none;height: 50px;" name="jianjie" class="form-control" id="editor">
+                    {{list && list.jianjie}}</textarea>
+            </div>
+            <div class="buttons">
+                <input value="{{button}}" type="submit" class="btn btn-primary">
+            </div>
+        </form>
+
+    </div>
+</div>
+<!-- /主体内容 -->
+{{/block}} {{block 'script'}}
+<script src="/admin/lib/ckeditor5/ckeditor.js"></script>
+<script type="text/javascript">
+    let editor;
+
+    ClassicEditor
+        .create(document.querySelector('#editor'))
+        .then(newEditor => {
+            editor = newEditor;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+
+    // 获取数据
+    // const editorData = editor.getData();
+
+
+    //选择文件上传控件
+    var file = document.querySelector("#file");
+    var preview = document.querySelector("#preview");
+    //当用户选择文件之后
+    file.onchange = function() {
+        //创建文件读取对象
+        var reader = new FileReader();
+        //用户选择的文件列表
+        // console.log(this.files[0]);
+
+        //读取文件
+        reader.readAsDataURL(this.files[0]);
+
+        //监听onload事件
+        reader.onload = function() {
+            //将读取的文件显示在页面上
+            preview.src = reader.result;
+        }
+    }
+</script>
+{{/block}}

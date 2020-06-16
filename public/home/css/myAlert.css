@@ -1,0 +1,94 @@
+@charset "utf-8";
+
+*{
+	margin: 0;
+	padding: 0;
+}
+ul,ol,li{
+	list-style: none;
+}
+html,body{
+	width: 100%;
+	height: 100%;
+	font-size: 62.5%;
+}
+
+.alertDisable{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: none;
+	background-color: rgba(0,0,0,0.7);
+	filter: progid:DXImageTransform.Microsoft.gradient(startcolorstr=#7F000000,endcolorstr=#7F000000);
+	z-index: 99;
+}
+.alertBox{
+	width: 38rem;
+	height: 20rem;
+	position: absolute;
+	top: 20%;
+	left: 50%;
+	margin-left: -19rem;
+	border-radius: 0.5rem;
+	overflow: hidden;
+	background-color: #fff;
+}
+.alertHeader{
+	font-size: 1.6rem;
+	height: 3rem;
+	line-height: 3rem;
+	text-align: center;
+	font-weight: bolder;
+	background-color: #ccc;
+}
+.alertContent{
+	height: 10rem;
+	overflow-y: auto;
+	padding: 1rem;
+	color: #333;
+}
+.alertContent p{
+	font-size: 1.4rem;
+	/*letter-spacing: 0.1rem;*/
+	word-break:break-all;
+	text-indent: 2rem;
+	text-align: left;
+}
+.alertFooter{
+	height: 5rem;
+	text-align: center;
+	line-height: 5rem;
+	border-top: 1px solid #ccc;
+	/*background-color: #ccc;*/
+	font-size: 0;
+}
+.alertFooter a{
+	display: inline-block;
+	vertical-align: middle;
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
+	width: 10rem;
+	height: 3rem;
+	line-height: 3rem;	
+	color: #000;
+	font-size: 1.4rem;
+	border-radius: 0.3rem;
+	background-color: #fff;
+}
+.alertFooter a.alertOK{
+	background-color: #3475f5;
+	color: #fff;
+	margin-right: 5%;
+}
+.alertFooter a.alertCancle{
+	border: 1px solid #3475f5;
+	box-sizing: border-box;
+	margin-left: 5%;
+}
+.alertFooter a:hover{
+	text-decoration: none;
+	/*background-color: #777;*/
+}
